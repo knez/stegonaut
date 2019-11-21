@@ -1,0 +1,7 @@
+{
+  "name": "stegonaut",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "xdg-open src/static/index.html"
+  }
+}
