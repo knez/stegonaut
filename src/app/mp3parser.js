@@ -10,9 +10,31 @@ function MP3Parser(arrayBuffer) {
     var current = 0;
     var end = buffer.byteLength;
 
+    var bitrateTable = [
+        0, 32, 40, 48,
+        56, 64, 80, 96,
+        112, 128, 160, 192,
+        224, 256, 320, 0
+    ];
+
+    var srateTable = [
+        44.1, 48.0, 32.0, 0.0
+    ];
+
+    // Helper variables for unpacking the frame header
+    var bitrate, srate, padding;
+
     // TODO
     var _skipTags = function() {
 
+    };
+
+    // Unpack frame header audio metadata
+    var _unpack = function() {
+        var byte = buffer[current + 2];
+        bitrate = bitrateTable[byte >> 4];
+        srate = srateTable[(byte & 0x0C) >> 2];
+        padding = (byte & 0x02) >> 1;
     };
 
     _skipTags();
@@ -26,7 +48,9 @@ function MP3Parser(arrayBuffer) {
     };
 
     this.nextFrame = function() {
-
+        _unpack();
+        var offset = Math.trunc(144 * bitrate / srate + padding);
+        current += offset;
     };
 
     this.hasNext = function() {
