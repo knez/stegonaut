@@ -9,9 +9,8 @@ function loadFile() {
     var reader = new FileReader();
     var file = document.getElementById("file").files[0];
     reader.onload = function() {
-        // mp3 = new MP3Stego(file.name, reader.result);
-        // document.getElementById("counter").value = mp3.spaceLeft();
-        alert(reader.result.byteLength);
+        mp3 = new MP3Stego(file.name, reader.result);
+        document.getElementById("counter").value = mp3.spaceLeft();
     };
     reader.readAsArrayBuffer(file);
 }
