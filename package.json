@@ -1,0 +1,11 @@
+{
+  "name": "stegonaut",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "xdg-open src/static/index.html",
+    "lint": "eslint src/"
+  },
+  "devDependencies": {
+    "eslint": "^6.6.0"
+  }
+}

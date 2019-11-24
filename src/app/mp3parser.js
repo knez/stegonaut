@@ -1,0 +1,67 @@
+/*
+ * Provides a mechanism for iterating through
+ * an mp3 file frame by frame, and modifying their headers.
+ * @param arrayBuffer: raw mp3 content in bytes
+ */
+function MP3Parser(arrayBuffer) {
+    // Init stuff
+    var buffer = new Uint8Array(arrayBuffer);
+    var start = 0;
+    var current = 0;
+    var end = buffer.byteLength;
+
+    var bitrateTable = [
+        0, 32, 40, 48,
+        56, 64, 80, 96,
+        112, 128, 160, 192,
+        224, 256, 320, 0
+    ];
+
+    var srateTable = [
+        44.1, 48.0, 32.0, 0.0
+    ];
+
+    // Helper variables for unpacking the frame header
+    var bitrate, srate, padding;
+
+    // TODO
+    var _skipTags = function() {
+
+    };
+
+    // Unpack frame header audio metadata
+    var _unpack = function() {
+        var byte = buffer[current + 2];
+        bitrate = bitrateTable[byte >> 4];
+        srate = srateTable[(byte & 0x0C) >> 2];
+        padding = (byte & 0x02) >> 1;
+    };
+
+    _skipTags();
+
+    this.getFrameHeader = function() {
+
+    };
+
+    this.setFrameHeader = function() {
+
+    };
+
+    this.nextFrame = function() {
+        _unpack();
+        var offset = Math.trunc(144 * bitrate / srate + padding);
+        current += offset;
+    };
+
+    this.hasNext = function() {
+        return current < end;
+    };
+
+    this.seekStart = function() {
+        current = start;
+    };
+
+    this.getRaw = function() {
+        return buffer;
+    };
+}
