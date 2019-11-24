@@ -8,6 +8,10 @@ document.getElementById("file")
 function loadFile() {
     var reader = new FileReader();
     var file = document.getElementById("file").files[0];
+    if (!file.name.endsWith(".mp3")) {
+        alert("Not an MP3");
+        return;
+    }
     reader.onload = function() {
         mp3 = new MP3Stego(file.name, reader.result);
         document.getElementById("counter").value = mp3.spaceLeft();
