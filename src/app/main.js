@@ -1,4 +1,4 @@
-var mp3;
+var mp3, maxChars;
 
 // Init DOM elements
 var input = document.getElementById("input");
@@ -17,7 +17,8 @@ function loadFile() {
     }
     reader.onload = function() {
         mp3 = new MP3Stego(file.name, reader.result);
-        counter.value = mp3.spaceLeft();
+        maxChars = mp3.spaceLeft();
+        counter.value = maxChars;
     };
     reader.readAsArrayBuffer(file);
 }
