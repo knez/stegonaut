@@ -32,6 +32,13 @@ function MP3Parser(arrayBuffer) {
         if (str == "TAG") {
             end = end - 128; // skip
         }
+        // ID3v2
+        triplet = buffer.slice(0, 3);
+        str = String.fromCharCode.apply(String, triplet);
+        if (str == "ID3") {
+            var size = buffer.slice(6, 10);
+            current = start = _synchToInt(size) + 10;
+        }
     };
 
     // Unpack frame header audio metadata
