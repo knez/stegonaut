@@ -24,9 +24,26 @@ function MP3Parser(arrayBuffer) {
     // Helper variables for unpacking the frame header
     var bitrate, srate, padding;
 
-    // TODO
-    var _skipTags = function() {
+    // Decode synchsafe integer
+    var _synchToInt = function(b) {
+        return b[3] | (b[2] << 7) | (b[1] << 14) | (b[0] << 21);
+    };
 
+    // Detect tags and skip them (ID3v1 and ID3v2)
+    var _skipTags = function() {
+        // ID3v1
+        var triplet = buffer.slice(end - 128, end - 125);
+        var str = String.fromCharCode.apply(String, triplet);
+        if (str == "TAG") {
+            end = end - 128; // skip
+        }
+        // ID3v2
+        triplet = buffer.slice(0, 3);
+        str = String.fromCharCode.apply(String, triplet);
+        if (str == "ID3") {
+            var size = buffer.slice(6, 10);
+            current = start = _synchToInt(size) + 10;
+        }
     };
 
     // Unpack frame header audio metadata
