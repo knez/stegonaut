@@ -24,9 +24,14 @@ function MP3Parser(arrayBuffer) {
     // Helper variables for unpacking the frame header
     var bitrate, srate, padding;
 
-    // TODO
+    // Detect tags and skip them (ID3v1 and ID3v2)
     var _skipTags = function() {
-
+        // ID3v1
+        var triplet = buffer.slice(end - 128, end - 125);
+        var str = String.fromCharCode.apply(String, triplet);
+        if (str == "TAG") {
+            end = end - 128; // skip
+        }
     };
 
     // Unpack frame header audio metadata
