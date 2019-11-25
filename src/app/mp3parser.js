@@ -24,6 +24,11 @@ function MP3Parser(arrayBuffer) {
     // Helper variables for unpacking the frame header
     var bitrate, srate, padding;
 
+    // Decode synchsafe integer
+    var _synchToInt = function(b) {
+        return b[3] | (b[2] << 7) | (b[1] << 14) | (b[0] << 21);
+    };
+
     // Detect tags and skip them (ID3v1 and ID3v2)
     var _skipTags = function() {
         // ID3v1
