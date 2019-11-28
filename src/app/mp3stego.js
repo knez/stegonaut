@@ -9,6 +9,27 @@ function MP3Stego(fileName, arrayBuffer) {
     var name = fileName;
     var mp3 = new MP3Parser(arrayBuffer);
 
+    // Sets the flag indicating if a file has been modified.
+    // Sets num, which represents the number of frames to read
+    // when extracting the file again.
+    var _setSignature = function(num) {
+        mp3.seekStart();
+        _embed(0x1F);   // Set file modified flag
+        mp3.nextFrame();
+        for (var i = 0; i < 4; i++) {
+            _embed((num >> i * 5) & 0x1F);
+            mp3.nextFrame();
+        }
+    };
+
+    // Embed payload (5 bits) into frame header
+    var _embed = function(payload) {
+        var header = mp3.getFrameHeader();
+        header[0] = (header[0] & 0xFE) | payload >> 4;
+        header[1] = (header[1] & 0xF0) | payload & 0x0F;
+        mp3.setFrameHeader(header);
+    };
+
     var _countFrames = function() {
         var frames = 0;
         while (mp3.hasNext()) {
@@ -32,8 +53,15 @@ function MP3Stego(fileName, arrayBuffer) {
         return Math.trunc(((frameCount * 5) + 1) / 8);
     };
 
+    // Embed message into frame headers
     this.embedText = function(message) {
-
+        // Split message into chunks of 5 bits
+        var enc = Base32.encode(message);
+        _setSignature(enc.byteLength);
+        for (var i = 0; i < enc.byteLength; i++) {
+            _embed(enc[i]);
+            mp3.nextFrame();
+        }
     };
 
     this.extractText = function() {
