@@ -56,12 +56,15 @@ function MP3Parser(arrayBuffer) {
 
     _skipTags();
 
+    // Get two least significant bytes of a frame header
     this.getFrameHeader = function() {
-
+        return buffer.slice(current + 2, current + 4);
     };
 
-    this.setFrameHeader = function() {
-
+    // Set two least significant bytes of a frame header
+    this.setFrameHeader = function(header) {
+        buffer[current + 2] = header[0];
+        buffer[current + 3] = header[1];
     };
 
     this.nextFrame = function() {
