@@ -4,9 +4,6 @@ var mp3, maxChars;
 var input = document.getElementById("input");
 var counter = document.getElementById("counter");
 
-// Add event handlers
-input.addEventListener("change", loadFile, true);
-
 // Load raw mp3 to buffer
 function loadFile() {
     var reader = new FileReader();
