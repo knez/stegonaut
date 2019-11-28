@@ -7,15 +7,15 @@
 function MP3Stego(fileName, arrayBuffer) {
     // Init private members
     var name = fileName;
-    var mp3file = new MP3Parser(arrayBuffer);
+    var mp3 = new MP3Parser(arrayBuffer);
 
     var _countFrames = function() {
         var frames = 0;
-        while (mp3file.hasNext()) {
+        while (mp3.hasNext()) {
             frames++;
-            mp3file.nextFrame();
+            mp3.nextFrame();
         }
-        mp3file.seekStart();
+        mp3.seekStart();
         return frames;
     };
 
@@ -32,11 +32,11 @@ function MP3Stego(fileName, arrayBuffer) {
         return Math.trunc(((frameCount * 5) + 1) / 8);
     };
 
-    this.embed = function(message) {
+    this.embedText = function(message) {
 
     };
 
-    this.extract = function() {
+    this.extractText = function() {
 
     };
 
