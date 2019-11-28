@@ -3,6 +3,8 @@ var mp3, maxChars;
 // Init DOM elements
 var input = document.getElementById("input");
 var counter = document.getElementById("counter");
+var message = document.getElementById("message");
+var embedButton = document.getElementById("embedButton");
 
 // Load raw mp3 to buffer
 function loadFile() {
@@ -18,4 +20,12 @@ function loadFile() {
         counter.value = maxChars;
     };
     reader.readAsArrayBuffer(file);
+}
+
+// Embed text into mp3 and trigger download
+function embedText() {
+    message.disabled = embedButton.disabled = true;
+    mp3.embedText(message.value);
+    mp3.download();
+    message.disabled = embedButton.disabled = false;
 }
