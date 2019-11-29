@@ -67,7 +67,9 @@ function MP3Stego(fileName, arrayBuffer) {
 
     };
 
+    // Trigger the download of the newly created mp3 file
     this.download = function() {
-
+        var blob = new Blob([mp3.getRaw()], { type: "octet-stream" });
+        triggerDownload(name, blob);
     };
 }
