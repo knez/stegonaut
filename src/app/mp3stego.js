@@ -36,7 +36,6 @@ function MP3Stego(fileName, arrayBuffer) {
             frames++;
             mp3.nextFrame();
         }
-        mp3.seekStart();
         return frames;
     };
 
