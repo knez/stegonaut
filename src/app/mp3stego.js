@@ -56,8 +56,8 @@ function MP3Stego(fileName, arrayBuffer) {
     this.embedText = function(message) {
         // Split message into chunks of 5 bits
         var enc = Base32.encode(message);
-        _setSignature(enc.byteLength);
-        for (var i = 0; i < enc.byteLength; i++) {
+        _setSignature(enc.length);
+        for (var i = 0; i < enc.length; i++) {
             _embed(enc[i]);
             mp3.nextFrame();
         }
