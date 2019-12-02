@@ -1,4 +1,4 @@
-var mp3, maxChars;
+var mp3file, maxChars;
 
 // Init DOM elements
 var input = document.getElementById("input");
@@ -15,8 +15,8 @@ function loadFile() {
         return;
     }
     reader.onload = function() {
-        mp3 = new MP3Stego(file.name, reader.result);
-        maxChars = mp3.spaceLeft();
+        mp3file = new MP3Stego(file.name, reader.result);
+        maxChars = mp3file.spaceLeft();
         counter.value = maxChars;
     };
     reader.readAsArrayBuffer(file);
@@ -25,7 +25,7 @@ function loadFile() {
 // Embed text into mp3 and trigger download
 function embedText() {
     message.disabled = embedButton.disabled = true;
-    mp3.embedText(message.value);
-    mp3.download();
+    mp3file.embedText(message.value);
+    mp3file.download();
     message.disabled = embedButton.disabled = false;
 }
