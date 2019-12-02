@@ -1,9 +1,15 @@
 <html lang="en">
 <body>
     <input onchange="loadFile()" type="file" id="input" name="input" accept=".mp3"/><br><br>
-    <textarea onkeyup="charCounter(this)" id="message" style="width: 300px; height: 250px"></textarea><br>
+    <textarea onkeyup="charCounter(this)" id="message" style="width: 235px; height: 120px"></textarea><br>
     Remaining characters: <input type="text" id="counter" size="6" value="0" disabled><br>
     <button onclick="embedText()" type="button" id="embedButton">Embed</button>
+
+    <br><br><br>
+
+    <input onchange="loadFile2()" type="file" id="input2" name="input2" accept=".mp3"/><br><br>
+    <textarea id="message2" style="width: 235px; height: 120px"></textarea><br>
+    <button onclick="extractText()" type="button" id="extractButton">Extract</button>
 
     <script src="../app/helpers.js"></script>
     <script src="../app/base32.js"></script>
