@@ -6,7 +6,6 @@ var input2 = document.getElementById("input2");
 var counter = document.getElementById("counter");
 var message = document.getElementById("message");
 var message2 = document.getElementById("message2");
-var embedButton = document.getElementById("embedButton");
 
 // Load raw mp3 to buffer
 function loadFile() {
@@ -40,10 +39,8 @@ function loadFile2() {
 
 // Embed text into mp3 and trigger download
 function embedText() {
-    message.disabled = embedButton.disabled = true;
     mp3file.embedText(message.value);
     mp3file.download();
-    message.disabled = embedButton.disabled = false;
 }
 
 function extractText() {
