@@ -1,10 +1,13 @@
-function charCounter(textarea)
-{
-    if (textarea.value.length > maxChars) {
-        textarea.value = textarea.value.substring(0, maxChars);
-        return;
+// Count remaining characters (UTF-8)
+function charCounter(textarea) {
+    var utf8 = encodeUTF8(textarea.value);
+    if (utf8.length > maxChars) {
+        var i = maxChars, sync = 0;
+        while ((utf8[i--] >> 6) == 2)  // Self-synchronize backwards
+            sync++;
+        textarea.value = decodeUTF8(utf8.slice(0, maxChars - sync));
     } else {
-        counter.value = maxChars - textarea.value.length;
+        counter.value = maxChars - utf8.length;
     }
 }
 
