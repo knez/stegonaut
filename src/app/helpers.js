@@ -22,6 +22,32 @@ function triggerDownload(fileName, blob) {
     window.URL.revokeObjectURL(url);
 }
 
+// CryptoJS WordArray -> Byte Array
+function wordArrayToByteArray(wordArray, length) {
+    length = wordArray.sigBytes;
+    wordArray = wordArray.words;
+    var result = [], bytes, i = 0;
+    while (length > 0) {
+        bytes = wordToByteArray(wordArray[i++], Math.min(4, length));
+        length -= bytes.length;
+        result.push(bytes);
+    }
+    return [].concat.apply([], result);
+}
+
+function wordToByteArray(word, length) {
+    var ba = [];
+    if (length > 0)
+        ba.push(word >>> 24);
+    if (length > 1)
+        ba.push((word >>> 16) & 0xFF);
+    if (length > 2)
+        ba.push((word >>> 8) & 0xFF);
+    if (length > 3)
+        ba.push(word & 0xFF);
+    return ba;
+}
+
 // Taken from google closure library
 // Convert UTF-16 string -> UTF-8 byte array
 function encodeUTF8(str) {

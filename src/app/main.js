@@ -50,23 +50,28 @@ function embedText() {
             mode: CryptoJS.mode.CTR, padding: CryptoJS.pad.NoPadding
         });
         str = atob(enc.toString()).substr(8);
+        str = str.split("").map(c => c.charCodeAt(0));
+        mp3file.embedText(str);
+    } else {
+        mp3file.embedText(encodeUTF8(str));
     }
-    mp3file.embedText(str);
     mp3file.download();
 }
 
+// Extract text from a mp3 file
 function extractText() {
     if (mp3file2.isModified()) {
         var str = mp3file2.extractText();
-        // Decrypt stuff
         if (decrypt.checked) {
+            // Decrypt stuff
+            str = String.fromCharCode.apply(String, str);
             str = btoa("Salted__" + str);
             var dec = CryptoJS.AES.decrypt(str, decPwd.value, {
                 mode: CryptoJS.mode.CTR, padding: CryptoJS.pad.NoPadding
             });
-            str = dec.toString(CryptoJS.enc.Latin1);
+            str = wordArrayToByteArray(dec);
         }
-        message2.value = str;
+        message2.value = decodeUTF8(str);
     } else {
         alert("Nothing to extract");
     }
