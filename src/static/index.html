@@ -3,13 +3,19 @@
     <input onchange="loadFile()" type="file" id="input" name="input" accept=".mp3"/><br><br>
     <textarea onkeyup="charCounter(this)" id="message" style="width: 235px; height: 120px"></textarea><br>
     Remaining characters: <input type="text" id="counter" size="6" value="0" disabled><br>
+    <input type="checkbox" id="encChck">Encrypt
+    <input type="password" id="encPwd" size="16"><br>
     <button onclick="embedText()" type="button" id="embedButton">Embed</button>
 
-    <br><br><br>
+    <br><br>
 
     <input onchange="loadFile2()" type="file" id="input2" name="input2" accept=".mp3"/><br><br>
     <textarea id="message2" style="width: 235px; height: 120px"></textarea><br>
+    <input type="checkbox" id="decChck">Decrypt
+    <input type="password" id="decPwd" size="16"><br>
     <button onclick="extractText()" type="button" id="extractButton">Extract</button>
+
+    <script src="../app/lib/cryptojs.min.js"></script>
 
     <script src="../app/helpers.js"></script>
     <script src="../app/base32.js"></script>

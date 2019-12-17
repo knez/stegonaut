@@ -12,11 +12,11 @@ var Base32 = {
 
         while (i < input.length) {
 
-            chr1 = input.charCodeAt(i++);
-            chr2 = input.charCodeAt(i++);
-            chr3 = input.charCodeAt(i++);
-            chr4 = input.charCodeAt(i++);
-            chr5 = input.charCodeAt(i++);
+            chr1 = input[i++];
+            chr2 = input[i++];
+            chr3 = input[i++];
+            chr4 = input[i++];
+            chr5 = input[i++];
 
             enc1 = chr1 >> 3;
             enc2 = ((chr1 & 7) << 2)  | (chr2 >> 6);
@@ -47,7 +47,7 @@ var Base32 = {
 
     decode : function(input) {
 
-        var output = "";
+        var arr = [];
         var chr1, chr2, chr3, chr4, chr5;
         var enc1, enc2, enc3, enc4, enc5, enc6, enc7, enc8;
         var i = 0;
@@ -70,19 +70,20 @@ var Base32 = {
             chr5 = ((enc7 & 7) << 5)  |  enc8;
 
             if (!isNaN(enc8)) {
-                output += String.fromCharCode(chr1, chr2, chr3, chr4, chr5);
+                arr.push(chr1, chr2, chr3, chr4, chr5);
             } else {
                 if (isNaN(enc3)) {
-                    output += String.fromCharCode(chr1);
+                    arr.push(chr1);
                 } else if (isNaN(enc5)) {
-                    output += String.fromCharCode(chr1, chr2);
+                    arr.push(chr1, chr2);
                 } else if (isNaN(enc6)) {
-                    output += String.fromCharCode(chr1, chr2, chr3);
+                    arr.push(chr1, chr2, chr3);
                 } else {
-                    output += String.fromCharCode(chr1, chr2, chr3, chr4);
+                    arr.push(chr1, chr2, chr3, chr4);
                 }
             }
         }
-        return output;
+
+        return arr;
     }
 };

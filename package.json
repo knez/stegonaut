@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "scripts": {
     "start": "xdg-open src/static/index.html",
-    "lint": "eslint src/"
+    "lint": "eslint src/",
+    "test": "mocha"
   },
   "devDependencies": {
-    "eslint": "^6.6.0"
+    "eslint": "^6.6.0",
+    "mocha": "^6.2.2"
   }
 }
