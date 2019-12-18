@@ -19,16 +19,21 @@ function loadFile() {
     } else {
         reader.onload = function () {
             mp3 = new MP3Stego(file.name, reader.result);
-            toggleDiv("main");  // Hide main screen
-            if (mp3.isModified()) {
-                toggleDiv("extractBox");
-            } else {
-                maxChars = mp3.spaceLeft();
-                counter.value = maxChars;
-                toggleDiv("embedBox");
-            }
+            initScreen();
         };
         reader.readAsArrayBuffer(file);
+    }
+}
+
+// Load proper box depending on input
+function initScreen() {
+    toggleDiv("main");  // Hide main screen
+    if (mp3.isModified()) {
+        toggleDiv("extractBox");
+    } else {
+        maxChars = mp3.spaceLeft();
+        counter.value = maxChars;
+        toggleDiv("embedBox");
     }
 }
 
