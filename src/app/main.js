@@ -1,8 +1,7 @@
-var mp3file, mp3file2, maxChars;
+var mp3file, maxChars;
 
 // Init DOM elements
 var input = document.getElementById("input");
-var input2 = document.getElementById("input2");
 var encrypt = document.getElementById("encChck");
 var decrypt = document.getElementById("decChck");
 var encPwd = document.getElementById("encPwd");
@@ -17,28 +16,20 @@ function loadFile() {
     var file = input.files[0];
     if (!file.name.endsWith(".mp3")) {
         alert("Not an MP3");
-        return;
+    } else {
+        reader.onload = function () {
+            mp3file = new MP3Stego(file.name, reader.result);
+            document.getElementById("main").style.display = "none";
+            if (mp3file.isModified()) {
+                document.getElementById("extractBox").style.display = "block";
+            } else {
+                maxChars = mp3file.spaceLeft();
+                counter.value = maxChars;
+                document.getElementById("embedBox").style.display = "block";
+            }
+        };
+        reader.readAsArrayBuffer(file);
     }
-    reader.onload = function() {
-        mp3file = new MP3Stego(file.name, reader.result);
-        maxChars = mp3file.spaceLeft();
-        counter.value = maxChars;
-    };
-    reader.readAsArrayBuffer(file);
-}
-
-// Load raw mp3 to buffer
-function loadFile2() {
-    var reader = new FileReader();
-    var file = input2.files[0];
-    if (!file.name.endsWith(".mp3")) {
-        alert("Not an MP3");
-        return;
-    }
-    reader.onload = function() {
-        mp3file2 = new MP3Stego(file.name, reader.result);
-    };
-    reader.readAsArrayBuffer(file);
 }
 
 // Embed text into mp3 and trigger download
@@ -60,19 +51,15 @@ function embedText() {
 
 // Extract text from a mp3 file
 function extractText() {
-    if (mp3file2.isModified()) {
-        var str = mp3file2.extractText();
-        if (decrypt.checked) {
-            // Decrypt stuff
-            str = String.fromCharCode.apply(String, str);
-            str = btoa("Salted__" + str);
-            var dec = CryptoJS.AES.decrypt(str, decPwd.value, {
-                mode: CryptoJS.mode.CTR, padding: CryptoJS.pad.NoPadding
-            });
-            str = wordArrayToByteArray(dec);
-        }
-        message2.value = decodeUTF8(str);
-    } else {
-        alert("Nothing to extract");
+    var str = mp3file.extractText();
+    if (decrypt.checked) {
+        // Decrypt stuff
+        str = String.fromCharCode.apply(String, str);
+        str = btoa("Salted__" + str);
+        var dec = CryptoJS.AES.decrypt(str, decPwd.value, {
+            mode: CryptoJS.mode.CTR, padding: CryptoJS.pad.NoPadding
+        });
+        str = wordArrayToByteArray(dec);
     }
+    message2.value = decodeUTF8(str);
 }
