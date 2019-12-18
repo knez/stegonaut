@@ -11,12 +11,23 @@ function charCounter(textarea) {
     }
 }
 
+// Toggle div
+function toggleDiv(div) {
+    var x = document.getElementById(div);
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
+
 // Reset to landing page
 function reset(element) {
     var parentDiv = element.parentNode;
-    parentDiv.style.display = "none";
-    document.getElementById("main").style.display = "block";
+    toggleDiv(parentDiv.id);
+    toggleDiv("main");
     // Reset input fields and textarea
+    input.value = "";   // Clear input
     for (var i = 0; i < parentDiv.childNodes.length; i++) {
         var e = parentDiv.childNodes[i];
         if (e.tagName) {
