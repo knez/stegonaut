@@ -11,6 +11,24 @@ function charCounter(textarea) {
     }
 }
 
+// Reset to landing page
+function reset(element) {
+    var parentDiv = element.parentNode;
+    parentDiv.style.display = "none";
+    document.getElementById("main").style.display = "block";
+    // Reset input fields and textarea
+    for (var i = 0; i < parentDiv.childNodes.length; i++) {
+        var e = parentDiv.childNodes[i];
+        if (e.tagName) {
+            if (e.type && e.type == "checkbox") {
+                e.checked = false;
+            } else {
+                e.value = "";
+            }
+        }
+    }
+}
+
 function triggerDownload(fileName, blob) {
     var url = window.URL.createObjectURL(blob);
     var a = document.createElement("a");

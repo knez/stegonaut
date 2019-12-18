@@ -10,6 +10,7 @@
         <input type="checkbox" id="encChck">Encrypt
         <input type="password" id="encPwd" size="16"><br>
         <button onclick="embedText()" type="button">Embed</button>
+        <button onclick="reset(this)" type="button">Reset</button>
     </div>
 
     <div id="extractBox" style="display: none">
@@ -17,6 +18,7 @@
         <input type="checkbox" id="decChck">Decrypt
         <input type="password" id="decPwd" size="16"><br>
         <button onclick="extractText()" type="button">Extract</button>
+        <button onclick="reset(this)" type="button">Reset</button>
     </div>
 
     <script src="../app/lib/cryptojs.min.js"></script>
