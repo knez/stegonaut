@@ -1,4 +1,4 @@
-var mp3file, maxChars;
+var mp3, maxChars;
 
 // Init DOM elements
 var input = document.getElementById("input");
@@ -18,12 +18,12 @@ function loadFile() {
         alert("Not an MP3");
     } else {
         reader.onload = function () {
-            mp3file = new MP3Stego(file.name, reader.result);
+            mp3 = new MP3Stego(file.name, reader.result);
             document.getElementById("main").style.display = "none";
-            if (mp3file.isModified()) {
+            if (mp3.isModified()) {
                 document.getElementById("extractBox").style.display = "block";
             } else {
-                maxChars = mp3file.spaceLeft();
+                maxChars = mp3.spaceLeft();
                 counter.value = maxChars;
                 document.getElementById("embedBox").style.display = "block";
             }
@@ -42,16 +42,16 @@ function embedText() {
         });
         str = atob(enc.toString()).substr(8);
         str = str.split("").map(c => c.charCodeAt(0));
-        mp3file.embedText(str);
+        mp3.embedText(str);
     } else {
-        mp3file.embedText(encodeUTF8(str));
+        mp3.embedText(encodeUTF8(str));
     }
-    mp3file.download();
+    mp3.download();
 }
 
 // Extract text from a mp3 file
 function extractText() {
-    var str = mp3file.extractText();
+    var str = mp3.extractText();
     if (decrypt.checked) {
         // Decrypt stuff
         str = String.fromCharCode.apply(String, str);
