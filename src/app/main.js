@@ -41,30 +41,38 @@ function initScreen() {
 function embedText() {
     var str = message.value;
     if (encrypt.checked) {
-        // Encrypt stuff
-        var enc = CryptoJS.AES.encrypt(str, encPwd.value, {
-            mode: CryptoJS.mode.CTR, padding: CryptoJS.pad.NoPadding
-        });
-        str = atob(enc.toString()).substr(8);
-        str = str.split("").map(c => c.charCodeAt(0));
-        mp3.embedText(str);
+        mp3.embedText(encryptText(str));
     } else {
         mp3.embedText(encodeUTF8(str));
     }
     mp3.download();
 }
 
-// Extract text from a mp3 file
+// Extract text from an mp3 file
 function extractText() {
     var str = mp3.extractText();
     if (decrypt.checked) {
-        // Decrypt stuff
-        str = String.fromCharCode.apply(String, str);
-        str = btoa("Salted__" + str);
-        var dec = CryptoJS.AES.decrypt(str, decPwd.value, {
-            mode: CryptoJS.mode.CTR, padding: CryptoJS.pad.NoPadding
-        });
-        str = wordArrayToByteArray(dec);
+        str = decryptText(str);
     }
     message2.value = decodeUTF8(str);
+}
+
+// Encrypt stuff
+function encryptText(str) {
+    var enc = CryptoJS.AES.encrypt(str, encPwd.value, {
+        mode: CryptoJS.mode.CTR, padding: CryptoJS.pad.NoPadding
+    });
+    str = atob(enc.toString()).substr(8);
+    str = str.split("").map(c => c.charCodeAt(0));
+    return str;
+}
+
+// Decrypt stuff
+function decryptText(str) {
+    str = String.fromCharCode.apply(String, str);
+    str = btoa("Salted__" + str);
+    var dec = CryptoJS.AES.decrypt(str, decPwd.value, {
+        mode: CryptoJS.mode.CTR, padding: CryptoJS.pad.NoPadding
+    });
+    return wordArrayToByteArray(dec);
 }
