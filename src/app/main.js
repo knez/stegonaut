@@ -50,11 +50,11 @@ function embedText() {
 
 // Extract text from an mp3 file
 function extractText() {
-    var str = mp3.extractText();
+    var bytes = mp3.extractText();
     if (decrypt.checked) {
-        str = decryptText(str);
+        bytes = decryptText(bytes);
     }
-    message2.value = decodeUTF8(str);
+    message2.value = decodeUTF8(bytes);
 }
 
 // Encrypt stuff
@@ -63,13 +63,13 @@ function encryptText(str) {
         mode: CryptoJS.mode.CTR, padding: CryptoJS.pad.NoPadding
     });
     str = atob(enc.toString()).substr(8);
-    str = str.split("").map(c => c.charCodeAt(0));
-    return str;
+    var bytes = str.split("").map(c => c.charCodeAt(0));
+    return bytes;
 }
 
 // Decrypt stuff
-function decryptText(str) {
-    str = String.fromCharCode.apply(String, str);
+function decryptText(bytes) {
+    var str = String.fromCharCode.apply(String, bytes);
     str = btoa("Salted__" + str);
     var dec = CryptoJS.AES.decrypt(str, decPwd.value, {
         mode: CryptoJS.mode.CTR, padding: CryptoJS.pad.NoPadding
