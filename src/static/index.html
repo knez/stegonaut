@@ -7,16 +7,14 @@
     <div id="embedBox" style="display: none">
         <textarea onkeyup="charCounter(this)" id="message" style="width: 235px; height: 120px"></textarea><br>
         Remaining characters: <input type="text" id="counter" size="6" value="0" disabled><br>
-        <input type="checkbox" id="encChck">Encrypt
-        <input type="password" id="encPwd" size="16"><br>
+        <input type="password" id="encPwd" size="16" placeholder="Password (Optional)"><br>
         <button onclick="embedText()" type="button">Embed</button>
         <button onclick="reset(this)" type="button">Reset</button>
     </div>
 
     <div id="extractBox" style="display: none">
         <textarea id="message2" style="width: 235px; height: 120px"></textarea><br>
-        <input type="checkbox" id="decChck">Decrypt
-        <input type="password" id="decPwd" size="16"><br>
+        <input type="password" id="decPwd" size="16" placeholder="Password (Optional)"><br>
         <button onclick="extractText()" type="button">Extract</button>
         <button onclick="reset(this)" type="button">Reset</button>
     </div>

@@ -31,11 +31,7 @@ function reset(element) {
     for (var i = 0; i < parentDiv.childNodes.length; i++) {
         var e = parentDiv.childNodes[i];
         if (e.tagName) {
-            if (e.type && e.type == "checkbox") {
-                e.checked = false;
-            } else {
-                e.value = "";
-            }
+            e.value = "";
         }
     }
 }

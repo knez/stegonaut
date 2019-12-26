@@ -2,8 +2,6 @@ var mp3, maxChars;
 
 // Init DOM elements
 var input = document.getElementById("input");
-var encrypt = document.getElementById("encChck");
-var decrypt = document.getElementById("decChck");
 var encPwd = document.getElementById("encPwd");
 var decPwd = document.getElementById("decPwd");
 var counter = document.getElementById("counter");
@@ -40,7 +38,7 @@ function initScreen() {
 // Embed text into mp3 and trigger download
 function embedText() {
     var str = message.value;
-    if (encrypt.checked) {
+    if (encPwd) {
         mp3.embedText(encryptText(str));
     } else {
         mp3.embedText(encodeUTF8(str));
@@ -51,7 +49,7 @@ function embedText() {
 // Extract text from an mp3 file
 function extractText() {
     var bytes = mp3.extractText();
-    if (decrypt.checked) {
+    if (decPwd) {
         bytes = decryptText(bytes);
     }
     message2.value = decodeUTF8(bytes);
