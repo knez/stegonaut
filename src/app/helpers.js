@@ -7,7 +7,7 @@ function charCounter(textarea) {
             sync++;
         textarea.value = decodeUTF8(utf8.slice(0, maxChars - sync));
     } else {
-        counter.value = maxChars - utf8.length;
+        counter.value = "Remaining characters: " + (maxChars - utf8.length);
     }
 }
 

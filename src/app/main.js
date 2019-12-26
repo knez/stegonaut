@@ -30,7 +30,7 @@ function initScreen() {
         toggleDiv("extractBox");
     } else {
         maxChars = mp3.spaceLeft();
-        counter.value = maxChars;
+        counter.value = "Remaining characters: " + maxChars;
         toggleDiv("embedBox");
     }
 }
