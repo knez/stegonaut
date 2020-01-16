@@ -23,17 +23,14 @@ function toggleDiv(div) {
 
 // Reset to landing page
 function reset(element) {
-    var parentDiv = element.parentNode;
-    toggleDiv(parentDiv.id);
+    toggleDiv(element);
     toggleDiv("main");
-    // Reset input fields and textarea
-    input.value = "";   // Clear input
-    for (var i = 0; i < parentDiv.childNodes.length; i++) {
-        var e = parentDiv.childNodes[i];
-        if (e.tagName) {
-            e.value = "";
-        }
-    }
+    // Reset all input fields
+    input.value = "";
+    message.value = "";
+    message2.value = "";
+    encPwd.value = "";
+    decPwd.value = "";
 }
 
 function triggerDownload(fileName, blob) {
