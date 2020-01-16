@@ -19,6 +19,13 @@ function checkPassword(str) {
     return true;
 }
 
+function enableHoverEffects() {
+    var e = document.getElementById("dropArea");
+    e.ondragover = function() { e.style.borderColor = "#f90"; };
+    e.ondragleave = function() { e.style.borderColor = "#ddd"; };
+    e.ondrop = function() { e.style.borderColor = "#ddd"; };
+}
+
 // Count remaining characters (UTF-8)
 function charCounter(textarea) {
     var utf8 = encodeUTF8(textarea.value);
