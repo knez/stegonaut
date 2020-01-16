@@ -11,6 +11,14 @@ function copyText() {
     alert("Copied to clipboard!");
 }
 
+function checkPassword(str) {
+    if (str && str.length < 8) {
+        alert("Password must be at least 8 characters long");
+        return false;
+    }
+    return true;
+}
+
 // Count remaining characters (UTF-8)
 function charCounter(textarea) {
     var utf8 = encodeUTF8(textarea.value);

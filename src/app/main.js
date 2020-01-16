@@ -37,6 +37,7 @@ function initScreen() {
 
 // Embed text into mp3 and trigger download
 function embedText() {
+    if (!checkPassword(encPwd.value)) return;
     var str = message.value;
     if (encPwd) {
         mp3.embedText(encryptText(str));
@@ -48,6 +49,7 @@ function embedText() {
 
 // Extract text from an mp3 file
 function extractText() {
+    if (!checkPassword(decPwd.value)) return;
     var bytes = mp3.extractText();
     if (decPwd) {
         bytes = decryptText(bytes);
