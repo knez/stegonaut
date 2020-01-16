@@ -9,5 +9,8 @@
   "devDependencies": {
     "eslint": "^6.6.0",
     "mocha": "^6.2.2"
+  },
+  "dependencies": {
+    "bootstrap": "^4.4.1"
   }
 }
