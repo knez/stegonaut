@@ -8,25 +8,95 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <link rel="stylesheet" type="text/css" href="../../node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     </head>
 <body>
-    <div id="main">
-        <input onchange="loadFile()" type="file" id="input" name="input" accept=".mp3"/>
-    </div>
+    <div class="container">
+      <header>
+        <div class="row pb-4">
+          <div class="col-4 col-md-3">
+            <img src="assets/img/logo.svg" class="logo">
+          </div>
+          <div class="col-8 pl-0 align-self-end col-md-9 pl-md-4">
+            <img src="assets/img/logo-text.svg" class="logo-text">
+            <h6 class="mt-3">Simple Audio Steganography</h6>
+          </div>
+        </div>
+      </header>
 
-    <div id="embedBox" style="display: none">
-        <textarea onkeyup="charCounter(this)" id="message" style="width: 235px; height: 120px"></textarea><br>
-        <input type="text" id="counter" size="25" value="0" disabled><br>
-        <input type="password" id="encPwd" size="16" placeholder="Password (Optional)"><br>
-        <button onclick="embedText()" type="button">Embed</button>
-        <button onclick="reset(this)" type="button">Reset</button>
-    </div>
+      <div id="main">
+        <div class="row">
+          <div class="col-12 pb-4 pb-md-5 pt-md-4">
+            <div id="dropArea">
+              <img src="assets/img/mp3.svg" class="mp3">
+              <small>Drop a file here, or</small>
+              <button onclick="input.click()" type="button" class="btn btn-secondary btn-sm">Select File</button>
+              <input onchange="loadFile()" type="file" id="input" name="input" accept=".mp3"/>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <h5>How it works <span class="question-mark">?</span></h5>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <p>Hide your most important personal text messages inside an MP3 file. Just drag and drop an MP3 file of your choice, type out your secret message, choose an optional encryption, and you are ready to go!</p>
+          </div>
+        </div>
+      </div>
 
-    <div id="extractBox" style="display: none">
-        <textarea id="message2" style="width: 235px; height: 120px"></textarea><br>
-        <input type="password" id="decPwd" size="16" placeholder="Password (Optional)"><br>
-        <button onclick="extractText()" type="button">Extract</button>
-        <button onclick="reset(this)" type="button">Reset</button>
+      <div id="embedBox" style="display: none">
+        <div class="row">
+          <div class="col-12">
+            <textarea onkeyup="charCounter(this)" class="form-control" id="message"></textarea>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-9">
+            <input type="text" id="counter" value="0" class="form-control" disabled>
+          </div>
+          <div class="col-3">
+            <button onclick="clear()" type="button" class="btn btn-primary btn-block">Clear</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <input type="password" id="encPwd" placeholder="Password (Optional)" class="form-control">
+          </div>
+          <div class="col-3">
+            <button onclick="embedText()" type="button" class="btn btn-secondary btn-block">Embed</button>
+          </div>
+          <div class="col-3">
+            <button onclick="reset(this)" type="button" class="btn btn-primary btn-block">Reset</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="extractBox" style="display: none">
+        <div class="row">
+          <div class="col-12">
+            <textarea class="form-control" id="message2"></textarea>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <button onclick="copy()" type="button" class="btn btn-primary btn-block">Copy</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <input type="password" id="decPwd" placeholder="Password (Optional)" class="form-control">
+          </div>
+          <div class="col-3">
+            <button onclick="extractText()" type="button" class="btn btn-secondary btn-block">Extract</button>
+          </div>
+          <div class="col-3">
+            <button onclick="reset(this)" type="button" class="btn btn-primary btn-block">Reset</button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script src="../app/lib/cryptojs.min.js"></script>
