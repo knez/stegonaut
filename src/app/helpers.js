@@ -1,3 +1,16 @@
+// UI-specific utility functions
+function clearText() {
+    message.value="";
+    message.focus();
+    charCounter(message);
+}
+
+function copyText() {
+    message2.select();
+    document.execCommand("copy");
+    alert("Copied to clipboard!");
+}
+
 // Count remaining characters (UTF-8)
 function charCounter(textarea) {
     var utf8 = encodeUTF8(textarea.value);
