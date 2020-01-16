@@ -39,7 +39,7 @@ function initScreen() {
 function embedText() {
     if (!checkPassword(encPwd.value)) return;
     var str = message.value;
-    if (encPwd) {
+    if (encPwd.value) {
         mp3.embedText(encryptText(str));
     } else {
         mp3.embedText(encodeUTF8(str));
@@ -51,7 +51,7 @@ function embedText() {
 function extractText() {
     if (!checkPassword(decPwd.value)) return;
     var bytes = mp3.extractText();
-    if (decPwd) {
+    if (decPwd.value) {
         bytes = decryptText(bytes);
     }
     message2.value = decodeUTF8(bytes);
