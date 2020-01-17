@@ -120,5 +120,17 @@
     <script src="../app/mp3stego.js"></script>
     <script src="../app/main.js"></script>
     <!-- endinject -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-156479490-1"></script>
+    <script>
+        if (window.location.host==="stegonaut.com" || window.location.host==="www.stegonaut.com") {
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'UA-156479490-1', {
+                'anonymize_ip': true,
+                'storage' : 'none'
+            });
+        }
+    </script>
 </body>
 </html>
