@@ -1,3 +1,31 @@
+// UI-specific utility functions
+function clearText() {
+    message.value="";
+    message.focus();
+    charCounter(message);
+}
+
+function copyText() {
+    message2.select();
+    document.execCommand("copy");
+    alert("Copied to clipboard!");
+}
+
+function checkPassword(str) {
+    if (str && str.length < 8) {
+        alert("Password must be at least 8 characters long");
+        return false;
+    }
+    return true;
+}
+
+function enableHoverEffects() {
+    var e = document.getElementById("dropArea");
+    e.ondragover = function() { e.style.borderColor = "#f90"; };
+    e.ondragleave = function() { e.style.borderColor = "#ddd"; };
+    e.ondrop = function() { e.style.borderColor = "#ddd"; };
+}
+
 // Count remaining characters (UTF-8)
 function charCounter(textarea) {
     var utf8 = encodeUTF8(textarea.value);
@@ -7,8 +35,30 @@ function charCounter(textarea) {
             sync++;
         textarea.value = decodeUTF8(utf8.slice(0, maxChars - sync));
     } else {
-        counter.value = maxChars - utf8.length;
+        counter.value = "Remaining characters: " + (maxChars - utf8.length);
     }
+}
+
+// Toggle div
+function toggleDiv(div) {
+    var x = document.getElementById(div);
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
+
+// Reset to landing page
+function reset(element) {
+    toggleDiv(element);
+    toggleDiv("main");
+    // Reset all input fields
+    input.value = "";
+    message.value = "";
+    message2.value = "";
+    encPwd.value = "";
+    decPwd.value = "";
 }
 
 function triggerDownload(fileName, blob) {

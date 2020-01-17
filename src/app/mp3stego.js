@@ -24,6 +24,7 @@ function MP3Stego(fileName, arrayBuffer) {
 
     // Get the number of frames to be read
     var _getSignature = function() {
+        mp3.seekStart();
         mp3.nextFrame();   // Skip flag
         var num = 0;
         for (var i = 0; i < 4; i++) {

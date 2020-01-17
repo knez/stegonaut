@@ -1,10 +1,7 @@
-var mp3file, mp3file2, maxChars;
+var mp3, maxChars;
 
 // Init DOM elements
 var input = document.getElementById("input");
-var input2 = document.getElementById("input2");
-var encrypt = document.getElementById("encChck");
-var decrypt = document.getElementById("decChck");
 var encPwd = document.getElementById("encPwd");
 var decPwd = document.getElementById("decPwd");
 var counter = document.getElementById("counter");
@@ -16,63 +13,66 @@ function loadFile() {
     var reader = new FileReader();
     var file = input.files[0];
     if (!file.name.endsWith(".mp3")) {
-        alert("Not an MP3");
-        return;
+        alert("Not an MP3 ¯\\_(ツ)_/¯");
+    } else {
+        reader.onload = function () {
+            mp3 = new MP3Stego(file.name, reader.result);
+            initScreen();
+        };
+        reader.readAsArrayBuffer(file);
     }
-    reader.onload = function() {
-        mp3file = new MP3Stego(file.name, reader.result);
-        maxChars = mp3file.spaceLeft();
-        counter.value = maxChars;
-    };
-    reader.readAsArrayBuffer(file);
 }
 
-// Load raw mp3 to buffer
-function loadFile2() {
-    var reader = new FileReader();
-    var file = input2.files[0];
-    if (!file.name.endsWith(".mp3")) {
-        alert("Not an MP3");
-        return;
+// Load proper box depending on input
+function initScreen() {
+    toggleDiv("main");  // Hide main screen
+    if (mp3.isModified()) {
+        toggleDiv("extractBox");
+    } else {
+        maxChars = mp3.spaceLeft();
+        counter.value = "Remaining characters: " + maxChars;
+        toggleDiv("embedBox");
     }
-    reader.onload = function() {
-        mp3file2 = new MP3Stego(file.name, reader.result);
-    };
-    reader.readAsArrayBuffer(file);
 }
 
 // Embed text into mp3 and trigger download
 function embedText() {
+    if (!checkPassword(encPwd.value)) return;
     var str = message.value;
-    if (encrypt.checked) {
-        // Encrypt stuff
-        var enc = CryptoJS.AES.encrypt(str, encPwd.value, {
-            mode: CryptoJS.mode.CTR, padding: CryptoJS.pad.NoPadding
-        });
-        str = atob(enc.toString()).substr(8);
-        str = str.split("").map(c => c.charCodeAt(0));
-        mp3file.embedText(str);
+    if (encPwd.value) {
+        mp3.embedText(encryptText(str));
     } else {
-        mp3file.embedText(encodeUTF8(str));
+        mp3.embedText(encodeUTF8(str));
     }
-    mp3file.download();
+    mp3.download();
 }
 
-// Extract text from a mp3 file
+// Extract text from an mp3 file
 function extractText() {
-    if (mp3file2.isModified()) {
-        var str = mp3file2.extractText();
-        if (decrypt.checked) {
-            // Decrypt stuff
-            str = String.fromCharCode.apply(String, str);
-            str = btoa("Salted__" + str);
-            var dec = CryptoJS.AES.decrypt(str, decPwd.value, {
-                mode: CryptoJS.mode.CTR, padding: CryptoJS.pad.NoPadding
-            });
-            str = wordArrayToByteArray(dec);
-        }
-        message2.value = decodeUTF8(str);
-    } else {
-        alert("Nothing to extract");
+    if (!checkPassword(decPwd.value)) return;
+    var bytes = mp3.extractText();
+    if (decPwd.value) {
+        bytes = decryptText(bytes);
     }
+    message2.value = decodeUTF8(bytes);
+}
+
+// Encrypt stuff
+function encryptText(str) {
+    var enc = CryptoJS.AES.encrypt(str, encPwd.value, {
+        mode: CryptoJS.mode.CTR, padding: CryptoJS.pad.NoPadding
+    });
+    str = atob(enc.toString()).substr(8);
+    var bytes = str.split("").map(c => c.charCodeAt(0));
+    return bytes;
+}
+
+// Decrypt stuff
+function decryptText(bytes) {
+    var str = String.fromCharCode.apply(String, bytes);
+    str = btoa("Salted__" + str);
+    var dec = CryptoJS.AES.decrypt(str, decPwd.value, {
+        mode: CryptoJS.mode.CTR, padding: CryptoJS.pad.NoPadding
+    });
+    return wordArrayToByteArray(dec);
 }
