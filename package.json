@@ -5,7 +5,7 @@
     "start": "xdg-open src/static/index.html",
     "lint": "eslint src/",
     "test": "mocha",
-    "uglify": "uglifyjs src/app/{,**/}*.js -m > dist/assets/js/stegonaut.min.js",
+    "uglify": "uglifyjs src/app/*.js src/app/lib/*.js -m > dist/assets/js/stegonaut.min.js",
     "prebuild": "mkdir -p dist/assets/js",
     "build": "cp -R src/static/* dist && npm run uglify",
     "postbuild": "postbuild -i src/static/index.html -o dist/index.html -j dist/assets/js -g dist/ && ./cdnize.sh",
