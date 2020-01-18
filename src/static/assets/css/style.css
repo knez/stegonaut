@@ -63,6 +63,10 @@ button {
     z-index: 1000;
 }
 
+a {
+    color: #6c757d;
+}
+
 @media (max-width: 768px)
 {
     div[class^="row"] {

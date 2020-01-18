@@ -41,11 +41,22 @@
             <h5>How it works <span class="question-mark">?</span></h5>
           </div>
         </div>
-        <div class="row">
-          <div class="col-12">
+        <div class="row pb-3">
+          <div class="col-12 text-justify">
             <p>
               Hide secret text messages inside MP3 files. Just choose an MP3 of your choice, type in your message, and a new MP3 file will be created. To uncover the message, load the newly created file again. Optionally, you can choose to encrypt the message with a password for additional layer of security.
             </p>
+          </div>
+        </div>
+        <div class="row text-center">
+          <div class="col-12 py-0">
+            <small class="text-muted">
+              <a href="https://github.com/knez/stegonaut" target="_blank">GitHub Project</a></small>
+          </div>
+        </div>
+        <div class="row text-center">
+          <div class="col-12 pt-0 pb-2">
+            <small class="text-muted">BTC: 1GQvcTPbXikR3So4twBmAGFKcYzUveQb2x</small>
           </div>
         </div>
       </div>
@@ -101,12 +112,25 @@
         </div>
       </div>
     </div>
-
+    <!-- inject:js -->
     <script src="../app/lib/cryptojs.min.js"></script>
     <script src="../app/helpers.js"></script>
     <script src="../app/base32.js"></script>
     <script src="../app/mp3parser.js"></script>
     <script src="../app/mp3stego.js"></script>
     <script src="../app/main.js"></script>
+    <!-- endinject -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-156479490-1"></script>
+    <script>
+        if (window.location.host==="stegonaut.com" || window.location.host==="www.stegonaut.com") {
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'UA-156479490-1', {
+                'anonymize_ip': true,
+                'storage' : 'none'
+            });
+        }
+    </script>
 </body>
 </html>

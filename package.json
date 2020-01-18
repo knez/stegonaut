@@ -4,11 +4,18 @@
   "scripts": {
     "start": "xdg-open src/static/index.html",
     "lint": "eslint src/",
-    "test": "mocha"
+    "test": "mocha",
+    "uglify": "uglifyjs src/app/*.js src/app/lib/*.js -m > dist/assets/js/stegonaut.min.js",
+    "prebuild": "mkdir -p dist/assets/js",
+    "build": "cp -R src/static/* dist && npm run uglify",
+    "postbuild": "postbuild -i src/static/index.html -o dist/index.html -j dist/assets/js -g dist/ && ./cdnize.sh",
+    "clean": "rm -rf dist/*"
   },
   "devDependencies": {
     "eslint": "^6.6.0",
-    "mocha": "^6.2.2"
+    "mocha": "^6.2.2",
+    "postbuild": "^2.1.0",
+    "uglify-js": "^3.7.5"
   },
   "dependencies": {
     "bootstrap": "^4.4.1"

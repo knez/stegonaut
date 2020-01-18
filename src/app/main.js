@@ -63,7 +63,9 @@ function encryptText(str) {
         mode: CryptoJS.mode.CTR, padding: CryptoJS.pad.NoPadding
     });
     str = atob(enc.toString()).substr(8);
-    var bytes = str.split("").map(c => c.charCodeAt(0));
+    var bytes = str.split("").map(function(c) {
+        return c.charCodeAt(0);
+    });
     return bytes;
 }
 
