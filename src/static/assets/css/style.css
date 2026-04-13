@@ -1,25 +1,101 @@
+/* ---------- CSS variables ---------- */
+:root {
+    --bg: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --text: #212529;
+    --text-muted: #6c757d;
+    --border: #dddddd;
+    --border-active: #ff9900;
+    --input-bg: #ffffff;
+    --input-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.06);
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.10);
+}
+
+html.dark {
+    --bg: #1a1a1a;
+    --bg-secondary: #242424;
+    --text: #e8e8e8;
+    --text-muted: #999999;
+    --border: #444444;
+    --input-bg: #2a2a2a;
+    --input-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.3);
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+/* ---------- Base ---------- */
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
 .container {
     margin-top: 0;
     margin-right: auto;
     margin-left: auto;
-    max-width: 450px;
+    max-width: 600px;
 }
 
 .logo { width: 95%; }
 .logo-text { width: 80%; }
 
+/* ---------- Dark toggle button ---------- */
+#darkToggle {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: none;
+    border: none;
+    font-size: 1.6rem;
+    cursor: pointer;
+    padding: 6px 10px;
+    color: var(--text-muted);
+    z-index: 10;
+    transition: color 0.2s ease;
+}
+
+#darkToggle:hover {
+    color: var(--border-active);
+}
+
+/* ---------- Drop area ---------- */
+@keyframes march {
+    from { background-position: 0 0, 0 100%, 0 0, 100% 0; }
+    to   { background-position: 20px 0, -20px 100%, 0 -20px, 100% 20px; }
+}
+
 #dropArea {
     width: 100%;
-    border: 4px dashed #ddd;
-    border-radius: 3px;
-    min-height: 250px;
+    border-radius: 12px;
+    min-height: 350px;
     height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    align-content:center;
-    text-align:center;
+    align-content: center;
+    text-align: center;
     justify-content: center;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow 0.2s ease;
+    position: relative;
+    background:
+        repeating-linear-gradient(90deg, var(--border) 0, var(--border) 10px, transparent 10px, transparent 20px) 0 0    / 100% 4px no-repeat,
+        repeating-linear-gradient(90deg, var(--border) 0, var(--border) 10px, transparent 10px, transparent 20px) 0 100% / 100% 4px no-repeat,
+        repeating-linear-gradient(0deg,  var(--border) 0, var(--border) 10px, transparent 10px, transparent 20px) 0 0    / 4px 100% no-repeat,
+        repeating-linear-gradient(0deg,  var(--border) 0, var(--border) 10px, transparent 10px, transparent 20px) 100% 0 / 4px 100% no-repeat;
+}
+
+#dropArea:hover,
+#dropArea.drag-over {
+    box-shadow: var(--shadow-md);
+    background:
+        repeating-linear-gradient(90deg, var(--border-active) 0, var(--border-active) 10px, transparent 10px, transparent 20px) 0 0    / 100% 4px no-repeat,
+        repeating-linear-gradient(90deg, var(--border-active) 0, var(--border-active) 10px, transparent 10px, transparent 20px) 0 100% / 100% 4px no-repeat,
+        repeating-linear-gradient(0deg,  var(--border-active) 0, var(--border-active) 10px, transparent 10px, transparent 20px) 0 0    / 4px 100% no-repeat,
+        repeating-linear-gradient(0deg,  var(--border-active) 0, var(--border-active) 10px, transparent 10px, transparent 20px) 100% 0 / 4px 100% no-repeat;
+    animation: march 0.4s linear infinite;
 }
 
 #dropArea > * {
@@ -37,11 +113,50 @@
     width: 70px;
 }
 
-textarea {
-    min-height: 160px;
-    background-color: #fff !important;
+/* Mobile: hide drag hint, show tap hint */
+@media (hover: none) and (pointer: coarse) {
+    #dropArea .drag-hint { display: none; }
+    #dropArea .tap-hint  { display: block; }
 }
 
+@media (hover: hover) {
+    #dropArea .tap-hint  { display: none; }
+    #dropArea .drag-hint { display: block; }
+}
+
+/* ---------- Forms ---------- */
+textarea {
+    min-height: 350px;
+    line-height: 1.6;
+    background-color: var(--input-bg) !important;
+    color: var(--text) !important;
+    border-color: var(--border) !important;
+    box-shadow: var(--input-shadow) !important;
+    border-radius: 6px !important;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.form-control {
+    background-color: var(--input-bg) !important;
+    color: var(--text) !important;
+    border-color: var(--border) !important;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.form-control:disabled {
+    background-color: var(--bg-secondary) !important;
+    color: var(--text-muted) !important;
+}
+
+.form-control:focus,
+textarea.form-control:focus {
+    border-color: var(--border-active) !important;
+    background-color: var(--input-bg) !important;
+    color: var(--text) !important;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 153, 0, 0.6) !important;
+}
+
+/* ---------- Misc ---------- */
 .question-mark {
     background-color: #ff9900;
     border-radius: 50%;
@@ -52,32 +167,95 @@ textarea {
     justify-content: center;
     color: white;
     font-weight: bold;
-}
-
-.form-control:focus {
-    border-color: #ff9900;
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 153, 0, 0.6);
+    cursor: help;
 }
 
 button {
     z-index: 1000;
+    transition: opacity 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
 }
 
 a {
-    color: #6c757d;
+    color: var(--text-muted);
+    text-decoration: underline;
 }
 
-@media (max-width: 768px)
-{
+a:hover {
+    color: var(--border-active);
+}
+
+.footer-icons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.footer-icon {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+}
+
+.footer-icon:hover {
+    color: var(--border-active);
+}
+
+.footer-dot {
+    color: var(--border);
+    font-size: 1.4rem;
+    line-height: 36px;
+    user-select: none;
+}
+
+.footer-icon img {
+    border-radius: 20px;
+}
+
+.github-circle {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #555555;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+    flex-shrink: 0;
+}
+
+.github-circle svg {
+    fill: white;
+}
+
+.github-circle:hover {
+    background-color: #333333;
+}
+
+.text-muted {
+    color: var(--text-muted) !important;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
     div[class^="row"] {
         padding-left: 11px;
-        padding-right: 11px
+        padding-right: 11px;
     }
     div[class^="col"] { padding: 4px; }
+
+    #dropArea {
+        min-height: 260px;
+    }
+
+    textarea {
+        min-height: 220px !important;
+    }
 }
 
-@media (min-width: 768px)
-{
+@media (min-width: 768px) {
     div[class^="container"] { margin-top: 30px; }
     div[class^="col"] { padding: 4px; }
 }
