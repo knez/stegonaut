@@ -1,46 +1,5 @@
-// UI-specific utility functions
-function clearText() {
-    message.value="";
-    message.focus();
-    charCounter(message);
-}
-
-function copyText() {
-    message2.select();
-    document.execCommand("copy");
-    alert("Copied to clipboard!");
-}
-
-function checkPassword(str) {
-    if (str && str.length < 8) {
-        alert("Password must be at least 8 characters long");
-        return false;
-    }
-    return true;
-}
-
-function enableHoverEffects() {
-    var e = document.getElementById("dropArea");
-    e.ondragover = function() { e.style.borderColor = "#f90"; };
-    e.ondragleave = function() { e.style.borderColor = "#ddd"; };
-    e.ondrop = function() { e.style.borderColor = "#ddd"; };
-}
-
-// Count remaining characters (UTF-8)
-function charCounter(textarea) {
-    var utf8 = encodeUTF8(textarea.value);
-    if (utf8.length > maxChars) {
-        var i = maxChars, sync = 0;
-        while ((utf8[i--] >> 6) == 2)  // Self-synchronize backwards
-            sync++;
-        textarea.value = decodeUTF8(utf8.slice(0, maxChars - sync));
-    } else {
-        counter.value = "Remaining characters: " + (maxChars - utf8.length);
-    }
-}
-
 // Toggle div
-function toggleDiv(div) {
+export function toggleDiv(div) {
     var x = document.getElementById(div);
     if (x.style.display === "none") {
         x.style.display = "block";
@@ -49,19 +8,15 @@ function toggleDiv(div) {
     }
 }
 
-// Reset to landing page
-function reset(element) {
-    toggleDiv(element);
-    toggleDiv("main");
-    // Reset all input fields
-    input.value = "";
-    message.value = "";
-    message2.value = "";
-    encPwd.value = "";
-    decPwd.value = "";
+export function checkPassword(str) {
+    if (str && str.length < 8) {
+        alert("Password must be at least 8 characters long");
+        return false;
+    }
+    return true;
 }
 
-function triggerDownload(fileName, blob) {
+export function triggerDownload(fileName, blob) {
     var url = window.URL.createObjectURL(blob);
     var a = document.createElement("a");
     document.body.appendChild(a);
@@ -72,35 +27,9 @@ function triggerDownload(fileName, blob) {
     window.URL.revokeObjectURL(url);
 }
 
-// CryptoJS WordArray -> Byte Array
-function wordArrayToByteArray(wordArray, length) {
-    length = wordArray.sigBytes;
-    wordArray = wordArray.words;
-    var result = [], bytes, i = 0;
-    while (length > 0) {
-        bytes = wordToByteArray(wordArray[i++], Math.min(4, length));
-        length -= bytes.length;
-        result.push(bytes);
-    }
-    return [].concat.apply([], result);
-}
-
-function wordToByteArray(word, length) {
-    var ba = [];
-    if (length > 0)
-        ba.push(word >>> 24);
-    if (length > 1)
-        ba.push((word >>> 16) & 0xFF);
-    if (length > 2)
-        ba.push((word >>> 8) & 0xFF);
-    if (length > 3)
-        ba.push(word & 0xFF);
-    return ba;
-}
-
 // Taken from google closure library
 // Convert UTF-16 string -> UTF-8 byte array
-function encodeUTF8(str) {
+export function encodeUTF8(str) {
     var out = [], p = 0;
     for (var i = 0; i < str.length; i++) {
         var c = str.charCodeAt(i);
@@ -128,7 +57,7 @@ function encodeUTF8(str) {
 }
 
 // Convert UTF-8 byte array -> UTF-16 string
-function decodeUTF8(bytes) {
+export function decodeUTF8(bytes) {
     var out = [], pos = 0, c = 0;
     var c1, c2, c3, c4;
     while (pos < bytes.length) {

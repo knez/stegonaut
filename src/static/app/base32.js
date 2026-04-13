@@ -1,7 +1,7 @@
 /*
  * Modified Base32 encoding without padding.
  */
-var Base32 = {
+export const Base32 = {
 
     encode : function(input) {
 

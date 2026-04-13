@@ -3,7 +3,7 @@
  * an mp3 file frame by frame, and modifying their headers.
  * @param arrayBuffer: raw mp3 content in bytes
  */
-function MP3Parser(arrayBuffer) {
+export function MP3Parser(arrayBuffer) {
     // Init stuff
     var buffer = new Uint8Array(arrayBuffer);
     var start = 0;

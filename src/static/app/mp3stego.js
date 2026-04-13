@@ -1,10 +1,14 @@
+import { MP3Parser } from "./mp3parser.js";
+import { Base32 } from "./base32.js";
+import { triggerDownload } from "./helpers.js";
+
 /*
  * Main module. Contains the actual methods for
  * embedding and extracting text messages.
  * @param fileName: mp3 filename
  * @param arrayBuffer: raw mp3 content in bytes
  */
-function MP3Stego(fileName, arrayBuffer) {
+export function MP3Stego(fileName, arrayBuffer) {
     // Init private members
     var name = fileName;
     var mp3 = new MP3Parser(arrayBuffer);
@@ -65,10 +69,10 @@ function MP3Stego(fileName, arrayBuffer) {
 
     // Returns how many characters can be embedded
     // 5 frames are reserved for signature (1 + 4)
-    // 13 frames are reserved for encryption (salt + IV)
+    // 52 frames are reserved for encryption overhead (salt + IV = 32 bytes)
     this.spaceLeft = function() {
         var frameCount = _countFrames();
-        frameCount = frameCount - 5 - 13;
+        frameCount = frameCount - 5 - 52;
         return Math.trunc(((frameCount * 5) + 1) / 8);
     };
 
