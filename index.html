@@ -4,24 +4,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>STEGONAUT - Audio Steganography Tool</title>
+    <title>Stegonaut</title>
     <meta name="description" content="Hide secret text messages inside MP3 files. Just choose an MP3 of your choice, type in your message, and a new MP3 file will be created. To uncover the message, load the newly created file again. Optionally, you can choose to encrypt the message with a password for additional layer of security.">
     <meta name="keywords" content="Steganography,Audio, MP3">
-    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
-    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon-BwXBwyAD.svg">
+      <script type="module" crossorigin src="/assets/index-DR5J37wy.js"></script>
+      <link rel="stylesheet" crossorigin href="/assets/index-uY3wyj16.css">
     </head>
-<body onload="enableHoverEffects()">
+<body>
     <div class="container">
       <header>
         <div class="row pb-4">
           <div class="col-4 col-md-3">
-            <img src="assets/img/logo.svg" class="logo">
+            <img src="data:image/svg+xml,%3c?xml%20version='1.0'%20encoding='UTF-8'%20standalone='no'?%3e%3csvg%20xmlns:dc='http://purl.org/dc/elements/1.1/'%20xmlns:cc='http://creativecommons.org/ns%23'%20xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns%23'%20xmlns:svg='http://www.w3.org/2000/svg'%20xmlns='http://www.w3.org/2000/svg'%20id='svg6'%20version='1.1'%20style='-ms-transform:%20rotate(360deg);%20-webkit-transform:%20rotate(360deg);%20transform:%20rotate(360deg);'%20viewBox='0%200%2024%2024'%20preserveAspectRatio='xMidYMid%20meet'%20height='24'%20width='24'%3e%3cmetadata%20id='metadata12'%3e%3crdf:RDF%3e%3ccc:Work%20rdf:about=''%3e%3cdc:format%3eimage/svg+xml%3c/dc:format%3e%3cdc:type%20rdf:resource='http://purl.org/dc/dcmitype/StillImage'%20/%3e%3cdc:title%3e%3c/dc:title%3e%3c/cc:Work%3e%3c/rdf:RDF%3e%3c/metadata%3e%3cdefs%20id='defs10'%20/%3e%3cpath%20style='fill:%23ff9900;fill-opacity:1'%20id='path2'%20fill='%23626262'%20d='M12%203C9.31%203%207.41%204.22%207.41%204.22L6%209h12l-1.41-4.78S14.69%203%2012%203m0%208c-2.73%200-6.61.54-6.87.59c-1.04.28-1.88.56-2.54.82C1.58%2012.75%201%2013%201%2013h22s-.58-.25-1.59-.59c-.66-.26-1.52-.54-2.57-.82c0%200-4.02-.59-6.84-.59m-4.5%203A3.5%203.5%200%200%200%204%2017.5A3.5%203.5%200%200%200%207.5%2021a3.5%203.5%200%200%200%203.5-3.5c0-.16%200-.32-.03-.47c.32-.07.66-.13%201.03-.12c.37%200%20.71.05%201.03.12c-.03.15-.03.31-.03.47a3.5%203.5%200%200%200%203.5%203.5a3.5%203.5%200%200%200%203.5-3.5a3.5%203.5%200%200%200-3.5-3.5c-1.47%200-2.73.9-3.25%202.19c-.32-.1-.7-.19-1.25-.19s-.93.09-1.25.19A3.498%203.498%200%200%200%207.5%2014m0%201a2.5%202.5%200%200%201%202.5%202.5A2.5%202.5%200%200%201%207.5%2020A2.5%202.5%200%200%201%205%2017.5A2.5%202.5%200%200%201%207.5%2015m9%200a2.5%202.5%200%200%201%202.5%202.5a2.5%202.5%200%200%201-2.5%202.5a2.5%202.5%200%200%201-2.5-2.5a2.5%202.5%200%200%201%202.5-2.5z'%20/%3e%3c/svg%3e" class="logo">
           </div>
           <div class="col-8 pl-0 align-self-end col-md-9 pl-md-4">
-            <img src="assets/img/logo-text.svg" class="logo-text">
+            <img src="/assets/logo-text-CJjcTvNN.svg" class="logo-text">
             <h6 class="mt-3">Simple Audio Steganography</h6>
           </div>
+          <button id="darkToggle" type="button" title="Toggle dark mode">☾</button>
         </div>
       </header>
 
@@ -29,10 +30,11 @@
         <div class="row">
           <div class="col-12 pb-4 pb-md-5 pt-md-4">
             <div id="dropArea">
-              <img src="assets/img/mp3.svg" class="mp3">
-              <small>Drop a file here, or</small>
-              <button onclick="input.click()" type="button" class="btn btn-secondary btn-sm">Select File</button>
-              <input onchange="loadFile()" type="file" id="input" name="input" accept=".mp3"/>
+              <img src="data:image/svg+xml,%3c?xml%20version='1.0'%20encoding='UTF-8'%20standalone='no'?%3e%3c!--%20Uploaded%20to:%20SVG%20Repo,%20www.svgrepo.com,%20Generator:%20SVG%20Repo%20Mixer%20Tools%20--%3e%3csvg%20width='800'%20height='800'%20viewBox='0%200%20400%20400'%20version='1.1'%20id='svg9'%20xmlns='http://www.w3.org/2000/svg'%20xmlns:svg='http://www.w3.org/2000/svg'%3e%3cdefs%20id='defs1'%3e%3cstyle%20id='style1'%3e.cls-1{fill:%23101010;}%3c/style%3e%3c/defs%3e%3ctitle%20id='title1'%20/%3e%3cg%20id='xxx-word'%20style='fill:%23dddddd;fill-opacity:1'%20stroke='%23dddddd'%20stroke-width='4'%3e%3cpath%20class='cls-1'%20d='m%20325,105%20h%20-75%20a%205,5%200%200%201%20-5,-5%20V%2025%20a%205,5%200%200%201%2010,0%20v%2070%20h%2070%20a%205,5%200%200%201%200,10%20z'%20id='path1'%20style='fill:%23dddddd;fill-opacity:1'%20/%3e%3cpath%20class='cls-1'%20d='m%20325,154.83%20a%205,5%200%200%201%20-5,-5%20V%20102.07%20L%20247.93,30%20H%20100%20A%2020,20%200%200%200%2080,50%20v%2098.17%20a%205,5%200%200%201%20-10,0%20V%2050%20a%2030,30%200%200%201%2030,-30%20h%20150%20a%205,5%200%200%201%203.54,1.46%20l%2075,75%20A%205,5%200%200%201%20330,100%20v%2049.83%20a%205,5%200%200%201%20-5,5%20z'%20id='path2'%20style='fill:%23dddddd;fill-opacity:1'%20/%3e%3cpath%20class='cls-1'%20d='M%20300,380%20H%20100%20A%2030,30%200%200%201%2070,350%20v%20-75%20a%205,5%200%200%201%2010,0%20v%2075%20a%2020,20%200%200%200%2020,20%20h%20200%20a%2020,20%200%200%200%2020,-20%20v%20-75%20a%205,5%200%200%201%2010,0%20v%2075%20a%2030,30%200%200%201%20-30,30%20z'%20id='path3'%20style='fill:%23dddddd;fill-opacity:1'%20/%3e%3cpath%20class='cls-1'%20d='M%20275,280%20H%20125%20a%205,5%200%200%201%200,-10%20h%20150%20a%205,5%200%200%201%200,10%20z'%20id='path4'%20style='fill:%23dddddd;fill-opacity:1'%20/%3e%3cpath%20class='cls-1'%20d='M%20325,280%20H%2075%20A%2030,30%200%200%201%2045,250%20v%20-76.83%20a%2030,30%200%200%201%2030,-30%20h%200.2%20l%20250,1.66%20a%2030.09,30.09%200%200%201%2029.81,30%20V%20250%20A%2030,30%200%200%201%20325,280%20Z%20M%2075,153.17%20a%2020,20%200%200%200%20-20,20%20V%20250%20a%2020,20%200%200%200%2020,20%20h%20250%20a%2020,20%200%200%200%2020,-20%20v%20-75.17%20a%2020.06,20.06%200%200%200%20-19.88,-20%20l%20-250,-1.66%20z'%20id='path6'%20style='fill:%23dddddd;fill-opacity:1'%20/%3e%3cpath%20class='cls-1'%20d='m%20178.71,236%20h%20-9.8%20V%20189.32%20L%20154.14,236%20h%20-5%20L%20134.3,189.32%20V%20236%20h%20-7.85%20v%20-53.32%20h%2015%20l%2011.17,34.32%2011,-34.34%20h%2015.12%20z'%20id='path7'%20style='fill:%23dddddd;fill-opacity:1'%20/%3e%3cpath%20class='cls-1'%20d='m%20200.08,236%20h%20-9.61%20v%20-53.32%20h%2021.83%20q%209.34,0%2013.85,4.71%20a%2016.37,16.37%200%200%201%20-0.37,22.95%2017.49,17.49%200%200%201%20-12.38,4.53%20h%20-13.32%20z%20m%200,-29.37%20h%2011.37%20q%204.45,0%206.8,-2.19%20a%207.58,7.58%200%200%200%202.34,-5.82%208,8%200%200%200%20-2.17,-5.62%20q%20-2.17,-2.34%20-7.83,-2.34%20h%20-10.51%20z'%20id='path8'%20style='fill:%23dddddd;fill-opacity:1'%20/%3e%3cpath%20class='cls-1'%20d='m%20249.37,212.45%20v%20-7.58%20h%204.88%20a%2012.88,12.88%200%200%200%207.3,-2%206.53,6.53%200%200%200%202.93,-5.82%206.76,6.76%200%200%200%20-2.48,-5.7%2010.16,10.16%200%200%200%20-6.39,-1.91%20q%20-7.89,0%20-10.74,7.73%20l%20-8.79,-1.52%20a%2016.93,16.93%200%200%201%206.86,-10%2021.57,21.57%200%200%201%2012.95,-3.87%2021.26,21.26%200%200%201%2012.87,3.89%2012.24,12.24%200%200%201%205.33,10.41%2012.49,12.49%200%200%201%20-2.87,8.28%209.9,9.9%200%200%201%20-7.09,3.75%2013.59,13.59%200%200%201%208.42,4.34%2012.38,12.38%200%200%201%203.18,8.55%2013.87,13.87%200%200%201%20-5.53,11.31%20q%20-5.53,4.43%20-14.71,4.43%20-8.48,0%20-14,-4.32%20a%2018.47,18.47%200%200%201%20-7,-9.9%20l%209.1,-2.23%20q%202.73,8.91%2011.8,8.91%20a%2011.39,11.39%200%200%200%207.56,-2.4%207.32,7.32%200%200%200%202.87,-5.8%208.47,8.47%200%200%200%20-2.48,-6%20q%20-2.48,-2.6%20-7.48,-2.6%20z'%20id='path9'%20style='fill:%23dddddd;fill-opacity:1'%20/%3e%3c/g%3e%3c/svg%3e" class="mp3">
+              <small class="drag-hint">Drop a file here, or</small>
+              <small class="tap-hint">Tap to select an MP3</small>
+              <button type="button" class="btn btn-secondary btn-sm">Select File</button>
+              <input type="file" id="input" name="input" accept=".mp3"/>
             </div>
           </div>
         </div>
@@ -49,14 +51,10 @@
           </div>
         </div>
         <div class="row text-center">
-          <div class="col-12 py-0">
-            <small class="text-muted">
-              <a href="https://github.com/knez/stegonaut" target="_blank">GitHub Project</a></small>
-          </div>
-        </div>
-        <div class="row text-center">
-          <div class="col-12 pt-0 pb-2">
-            <small class="text-muted">BTC: 1GQvcTPbXikR3So4twBmAGFKcYzUveQb2x</small>
+          <div class="col-12 py-2">
+            <a href="https://ko-fi.com/niko18975" target="_blank" class="footer-icon">
+              <img height="36" src="https://storage.ko-fi.com/cdn/kofi3.png?v=3" border="0" alt="Buy Me a Coffee at ko-fi.com" />
+            </a>
           </div>
         </div>
       </div>
@@ -64,7 +62,7 @@
       <div id="embedBox" style="display: none">
         <div class="row">
           <div class="col-12">
-            <textarea onkeyup="charCounter(this)" class="form-control" id="message" placeholder="Type in your secret message here"></textarea>
+            <textarea class="form-control" id="message" placeholder="Type in your secret message here"></textarea>
           </div>
         </div>
         <div class="row">
@@ -72,7 +70,7 @@
             <input type="text" id="counter" value="0" class="form-control" disabled>
           </div>
           <div class="col-3">
-            <button onclick="clearText()" type="button" class="btn btn-primary btn-block">Clear</button>
+            <button data-action="clear" type="button" class="btn btn-outline-secondary btn-block">Clear</button>
           </div>
         </div>
         <div class="row">
@@ -80,10 +78,10 @@
             <input type="password" id="encPwd" placeholder="Password (Optional)" class="form-control">
           </div>
           <div class="col-3">
-            <button onclick="embedText()" type="button" class="btn btn-secondary btn-block">Embed</button>
+            <button data-action="embed" type="button" class="btn btn-primary btn-block">Embed</button>
           </div>
           <div class="col-3">
-            <button onclick="reset('embedBox')" type="button" class="btn btn-primary btn-block">Reset</button>
+            <button data-action="reset" type="button" class="btn btn-outline-secondary btn-block">Reset</button>
           </div>
         </div>
       </div>
@@ -96,7 +94,7 @@
         </div>
         <div class="row">
           <div class="col-12">
-            <button onclick="copyText()" type="button" class="btn btn-primary btn-block">Copy</button>
+            <button data-action="copy" type="button" class="btn btn-outline-secondary btn-block">Copy</button>
           </div>
         </div>
         <div class="row">
@@ -104,15 +102,14 @@
             <input type="password" id="decPwd" placeholder="Password (Optional)" class="form-control">
           </div>
           <div class="col-3">
-            <button onclick="extractText()" type="button" class="btn btn-secondary btn-block">Extract</button>
+            <button data-action="extract" type="button" class="btn btn-primary btn-block">Extract</button>
           </div>
           <div class="col-3">
-            <button onclick="reset('extractBox')" type="button" class="btn btn-primary btn-block">Reset</button>
+            <button data-action="reset" type="button" class="btn btn-outline-secondary btn-block">Reset</button>
           </div>
         </div>
       </div>
     </div>
-    <script src="assets/js/stegonaut.min.js"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-156479490-1"></script>
     <script>
         if (window.location.host==="stegonaut.com" || window.location.host==="www.stegonaut.com") {
