@@ -211,6 +211,11 @@ a:hover {
 
 .footer-icon img {
     border-radius: 20px;
+    transition: filter 0.2s ease;
+}
+
+html.dark .footer-icon img {
+    filter: invert(0.25);
 }
 
 .github-circle {
